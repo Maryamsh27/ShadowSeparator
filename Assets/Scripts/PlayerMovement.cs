@@ -6,17 +6,22 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 8f;
 
     private Rigidbody2D rb;
+    private Animator animator;
+
     private float moveInput;
     private bool isGrounded;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -24,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity.x,
                 jumpForce
             );
+
+            animator.SetBool("IsJumping", true);
         }
     }
 
@@ -40,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            animator.SetBool("IsJumping", false);
         }
     }
 
