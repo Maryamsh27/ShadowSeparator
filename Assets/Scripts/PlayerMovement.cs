@@ -21,17 +21,28 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        // Flip Character
+        if (moveInput > 0)
+        {
+            transform.localScale = new Vector3(0.6f, 0.6f, 1);
+        }
+        else if (moveInput < 0)
+        {
+            transform.localScale = new Vector3(-0.6f, 0.6f, 1);
+        }
 
+        // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(
                 rb.velocity.x,
                 jumpForce
             );
-
-            animator.SetBool("IsJumping", true);
         }
+
+        // Animator Parameters
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        animator.SetBool("IsJumping", !isGrounded);
     }
 
     void FixedUpdate()
@@ -47,7 +58,6 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            animator.SetBool("IsJumping", false);
         }
     }
 
