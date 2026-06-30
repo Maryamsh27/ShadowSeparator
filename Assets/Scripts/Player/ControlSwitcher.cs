@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ControlSwitcher : MonoBehaviour
@@ -7,24 +5,48 @@ public class ControlSwitcher : MonoBehaviour
     public GameObject player;
     public GameObject shadow;
 
-    bool controllingShadow = false;
+    private bool controllingShadow = false;
+
+    private PlayerMovement playerMovement;
+    private ShadowMovement shadowMovement;
+
+    void Start()
+    {
+        playerMovement = player.GetComponent<PlayerMovement>();
+        shadowMovement = shadow.GetComponent<ShadowMovement>();
+
+        if (shadowMovement != null)
+        {
+            shadowMovement.enabled = false;
+        }
+    }
 
     void Update()
     {
-        Debug.Log("Script Running");
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("Q Pressed");
-        }
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             controllingShadow = !controllingShadow;
 
-            Debug.Log(controllingShadow ?
-                "Shadow Control" :
-                "Player Control");
+            if (controllingShadow)
+            {
+                if (playerMovement != null)
+                    playerMovement.enabled = false;
+
+                if (shadowMovement != null)
+                    shadowMovement.enabled = true;
+
+                Debug.Log("Shadow Control");
+            }
+            else
+            {
+                if (shadowMovement != null)
+                    shadowMovement.enabled = false;
+
+                if (playerMovement != null)
+                    playerMovement.enabled = true;
+
+                Debug.Log("Player Control");
+            }
         }
     }
 }
