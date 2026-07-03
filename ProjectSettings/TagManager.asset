@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - ShadowWall
   layers:
   - Default
   - TransparentFX
@@ -15,9 +16,9 @@ TagManager:
   - Ground
   - Player
   - Effects
-  - 
-  - 
-  - 
+  - PlayerLayer
+  - ShadowLayer
+  - ShadowWallLayer
   - 
   - 
   - 
@@ -47,4 +48,10 @@ TagManager:
     locked: 0
   - name: New Layer 2
     uniqueID: 4176483885
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 1408431445
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2476135309
     locked: 0
