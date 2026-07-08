@@ -3,7 +3,6 @@ using UnityEngine;
 public class ButtonTrigger : MonoBehaviour
 {
     public GameObject door;
-    public GameObject portal;
 
     private bool activated = false;
 
@@ -16,9 +15,8 @@ public class ButtonTrigger : MonoBehaviour
             activated = true;
 
             door.SetActive(false);
-            portal.SetActive(true);
 
-            Debug.Log("Portal Activated!");
+            Debug.Log("Door Opened!");
         }
     }
 }
