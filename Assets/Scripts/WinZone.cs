@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinZone : MonoBehaviour
 {
@@ -6,7 +7,20 @@ public class WinZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("LEVEL COMPLETE!");
+            string currentScene = SceneManager.GetActiveScene().name;
+
+            if (currentScene == "Level1")
+            {
+                SceneManager.LoadScene("Level2");
+            }
+            else if (currentScene == "Level2")
+            {
+                SceneManager.LoadScene("Level3");
+            }
+            else if (currentScene == "Level3")
+            {
+                Debug.Log("YOU WIN!");
+            }
         }
     }
 }
