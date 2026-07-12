@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 8f;
 
+    public AudioSource jumpSound;
+
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -38,11 +40,18 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity.x,
                 jumpForce
             );
+
+            if (jumpSound != null)
+            {
+                jumpSound.Play();
+            }
         }
 
-        // Animator Parameters
-        animator.SetFloat("Speed", Mathf.Abs(moveInput));
-        animator.SetBool("IsJumping", !isGrounded);
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(moveInput));
+            animator.SetBool("IsJumping", !isGrounded);
+        }
     }
 
     void FixedUpdate()
