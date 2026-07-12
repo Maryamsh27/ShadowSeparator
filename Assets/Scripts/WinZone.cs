@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class WinZone : MonoBehaviour
 {
-    public GameObject winCanvas;
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -13,18 +11,13 @@ public class WinZone : MonoBehaviour
 
             if (currentScene == "Level1")
             {
+                Debug.Log("Level Complete");
                 SceneManager.LoadScene("Level2");
             }
             else if (currentScene == "Level2")
             {
+                Debug.Log("Level Complete");
                 SceneManager.LoadScene("Level3");
-            }
-            else if (currentScene == "Level3")
-            {
-                if (winCanvas != null)
-                {
-                    winCanvas.SetActive(true);
-                }
             }
         }
     }
